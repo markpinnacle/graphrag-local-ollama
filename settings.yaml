@@ -4,7 +4,7 @@ skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
   type: openai_chat # or azure_openai_chat
-  model: mistral
+  model: llama3.2
   model_supports_json: true # recommended if this is available for your model.
   # max_tokens: 4000
   # request_timeout: 180.0
@@ -107,8 +107,8 @@ community_report:
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/community_report.txt"
-  max_length: 2000
-  max_input_length: 8000
+  max_length: 8000
+  max_input_length: 10000
 
 cluster_graph:
   max_cluster_size: 10
