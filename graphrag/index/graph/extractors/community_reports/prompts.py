@@ -147,4 +147,24 @@ where 1, 5, 7, 23, 2, 34, 46, and 64 represent the id (not the index) of the rel
 
 Do not include information where the supporting evidence for it is not provided.
 
-Output:"""
+Output Must be like:     {{
+        "title": <report_title>,
+        "summary": <executive_summary>,
+        "rating": <impact_severity_rating>,
+        "rating_explanation": <rating_explanation>,
+        "findings": [
+            {{
+                "summary":<insight_1_summary>,
+                "explanation": <insight_1_explanation>
+            }},
+            {{
+                "summary":<insight_2_summary>,
+                "explanation": <insight_2_explanation>
+            }}
+        ]
+    }}
+
+
+
+
+"""

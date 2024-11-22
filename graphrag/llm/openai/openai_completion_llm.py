@@ -39,5 +39,6 @@ class OpenAICompletionLLM(BaseLLM[CompletionInput, CompletionOutput]):
         args = get_completion_llm_args(
             kwargs.get("model_parameters"), self.configuration
         )
+        print("here", args)
         completion = self.client.completions.create(prompt=input, **args)
         return completion.choices[0].text

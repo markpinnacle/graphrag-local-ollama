@@ -44,6 +44,7 @@ class BaseLLM(ABC, LLM[TIn, TOut], Generic[TIn, TOut]):
     ) -> LLMOutput[TOut]:
         """Invoke the LLM."""
         is_json = kwargs.get("json") or False
+        print("is_json", is_json)
         if is_json:
             return await self._invoke_json(input, **kwargs)
         return await self._invoke(input, **kwargs)

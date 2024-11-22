@@ -27,7 +27,7 @@ from .utils import (
 
 log = logging.getLogger(__name__)
 
-_MAX_GENERATION_RETRIES = 3
+_MAX_GENERATION_RETRIES = 1
 FAILED_TO_CREATE_JSON_ERROR = "Failed to generate valid JSON output"
 
 
@@ -55,6 +55,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
         completion = await self.client.chat.completions.create(
             messages=messages, **args
         )
+        print("completion", completion)
         return completion.choices[0].message.content
 
     async def _invoke_json(
@@ -84,7 +85,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
         while not is_valid(result.json) and retry < _MAX_GENERATION_RETRIES:
             result = await generate(retry)
             retry += 1
-
+        print("result", result.json)
         if is_valid(result.json):
             return result
         raise RuntimeError(FAILED_TO_CREATE_JSON_ERROR)
@@ -93,6 +94,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
         self, input: CompletionInput, **kwargs: Unpack[LLMInput]
     ) -> LLMOutput[CompletionOutput]:
         """Generate JSON output using a model's native JSON-output support."""
+        print(self._invoke)
         result = await self._invoke(
             input,
             **{
@@ -103,7 +105,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
                 },
             },
         )
-
+        print("result", result)
         raw_output = result.output or ""
         json_output = try_parse_json_object(raw_output)
 

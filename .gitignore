@@ -68,3 +68,8 @@ ragtest/
 .ragtest/
 .pipelines
 .pipeline
+/graphrag-ollama-env/bin
+/graphrag-ollama-env/lib
+graphrag-ollama-env/share/man/man1/ttx.1
+graphrag-ollama-env/pyvenv.cfg
+graphrag-ollama-env/lib64

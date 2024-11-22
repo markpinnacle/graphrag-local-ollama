@@ -53,6 +53,8 @@ class CommunityReportsExtractor:
     async def __call__(self, inputs: dict[str, Any]):
         """Call method definition."""
         output = None
+        print("inputs", inputs)
+        print("_extraction_prompt", self._extraction_prompt)
         try:
             response = (
                 await self._llm(
@@ -74,9 +76,12 @@ class CommunityReportsExtractor:
                 )
                 or {}
             )
+            print ("response", response)
             output = response.json or {}
         except Exception as e:
+            print(e)
             log.exception("error generating community report")
+            log.exception(e)
             self._on_error(e, traceback.format_exc(), None)
             output = {}
 
